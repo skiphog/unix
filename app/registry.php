@@ -4,16 +4,10 @@
  */
 return [
     'global' => [
-        //
-    ],
-    'web' => [
-        \App\Components\Auth::class => function () {
+        \App\Components\Auth::class => static function () {
             return (new \App\Components\Auth())->getAuthUser();
         },
     ],
-    'api' => [
-        \App\Components\Auth::class => function () {
-            return (new \App\Components\AuthApi())->getAuthUser();
-        },
-    ]
+    'web' => [],
+    'api' => []
 ];
