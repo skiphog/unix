@@ -1,0 +1,89 @@
+@import "../variables";
+
+.information {
+  margin-bottom: 20px;
+
+  &-header {
+    width: 200px;
+    font-size: 18px;
+    text-align: center;
+    padding: 8px;
+    margin: -8px auto 5px;
+    background: url(/img/tablehead.jpg) center no-repeat;
+  }
+
+  &-login {
+    text-align: center;
+    margin: -5px 0 0;
+  }
+
+  &-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 40px;
+
+    &-input {
+      width: 160px;
+      padding: 5px;
+    }
+
+    &-users {
+      margin: 20px 0 0;
+
+      li {
+        white-space: nowrap;
+      }
+    }
+
+    &-city {
+      margin-top: 10px;
+    }
+
+    &-small {
+      font-size: 12px;
+      line-height: 1.2;
+    }
+  }
+
+  &-important img {
+    display: block;
+    margin: 10px auto;
+  }
+
+  &-widget {
+    display: table;
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    margin: 0 auto 10px;
+    padding: 5px;
+
+    div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    &-first {
+      width: 30px;
+    }
+
+    &-second {
+      width: 170px;
+      padding: 0 5px;
+    }
+  }
+
+  &-deep {
+    margin-bottom: 10px;
+  }
+
+  &-exit {
+    margin: 20px 0 0 40px;
+  }
+}
+
+.list-divider {
+  margin: 5px 0;
+  border-top: 1px solid transparent;
+}

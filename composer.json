@@ -1,0 +1,41 @@
+{
+  "name": "skiphog/unix",
+  "license": "MIT",
+  "description": "Application swing-kiska",
+  "require": {
+    "php": "^7.3",
+    "ext-ctype": "*",
+    "ext-curl": "*",
+    "ext-dom": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
+    "ext-pdo": "*",
+    "amstaffix/pagination": "^1.1",
+    "claviska/simpleimage": "^3.3",
+    "crudch/framework": "dev-master",
+    "emojione/emojione": "^4.0",
+    "mobiledetect/mobiledetectlib": "^2.8",
+    "sendpulse/rest-api": "^1.0"
+  },
+  "require-dev": {},
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/framework"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    },
+    "files": []
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
