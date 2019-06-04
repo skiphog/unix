@@ -2,7 +2,7 @@
 
 namespace App\Models\Users;
 
-use System\Model;
+use Crudch\Database\Model;
 
 /**
  * Class User
