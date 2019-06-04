@@ -121,7 +121,7 @@ class Myrow extends User
      *
      * @return string
      */
-    public function getCountFriends()
+    public function cntFriends()
     {
         $sql = "select count(*) from friends where fr_kogo = {$this->id} and fr_podtv_kogo = 0";
 
@@ -133,7 +133,7 @@ class Myrow extends User
      *
      * @return string
      */
-    public function getCountMessage()
+    public function cntMessage()
     {
         if (null === $this->cnt_message) {
             $sql = "select count(*) from privat where pr_id_pol = {$this->id} and pr_pol_vis = 0";
@@ -148,7 +148,7 @@ class Myrow extends User
      *
      * @return string
      */
-    public function getCountNotify()
+    public function cntNotify()
     {
         if (null === $this->cnt_notify) {
             $sql = "select count(*) from notification where id_user = {$this->id} and visibled = 0";
@@ -163,7 +163,7 @@ class Myrow extends User
      *
      * @return string
      */
-    public function getCountGuest()
+    public function cntGuest()
     {
         $sql = "select count(*) from whoisloock where wholoock_kogo = {$this->id} and looking = 0";
 
@@ -173,7 +173,7 @@ class Myrow extends User
     /**
      * @return mixed
      */
-    public function getPrivateMessage()
+    public function privateMessage()
     {
         $dbh = db();
         $sql = 'select count(*) from privat where pr_id_pol = ' . $this->id . ' and pr_pol_vis = 0';
@@ -198,7 +198,7 @@ class Myrow extends User
     /**
      * @return string|null
      */
-    public function getSgender()
+    public function sgender()
     {
         if ($this->isGuest()) {
             return null;
