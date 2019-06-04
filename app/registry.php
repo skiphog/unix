@@ -5,9 +5,9 @@
 return [
     'global' => [
         \App\Components\Auth::class => static function () {
-            return (new \App\Components\Auth())->getAuthUser();
+            return \App\Components\Auth::init();
         },
     ],
-    'web' => [],
-    'api' => []
+    'web'    => [],
+    'api'    => [],
 ];

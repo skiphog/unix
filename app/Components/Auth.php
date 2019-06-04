@@ -12,30 +12,12 @@ use App\Models\Users\Myrow;
 class Auth
 {
     /**
-     * @var Myrow
-     */
-    protected $user;
-
-    public function __construct()
-    {
-        $this->init();
-    }
-
-    /**
      * @return Myrow
      */
-    public function getAuthUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @return Myrow
-     */
-    protected function init()
+    public static function init()
     {
         if (isset($_SESSION['id'], $_SESSION['password'])) {
-            return $this->user = Myrow::getMyrow($_SESSION['id'], $_SESSION['password']) ?: new Myrow();
+            return Myrow::getMyrow($_SESSION['id'], $_SESSION['password']) ?: new Myrow();
         }
 
         if (isset($_COOKIE['id'], $_COOKIE['password'])) {
@@ -46,10 +28,10 @@ class Auth
                 $_SESSION['password'] = $user->password;
                 $_SESSION['login'] = $user->login;
 
-                return $this->user = $user;
+                return $user;
             }
         }
 
-        return $this->user = new Myrow();
+        return new Myrow();
     }
 }
