@@ -9,30 +9,37 @@ use Detection\MobileDetect;
  *
  * @property string $password
  * @property int    $country
- * @property int    $hidden_img
- * @property int    $stels
+ * @property int    $stealth
  *
- * @package App\Models
+ * @package App\Models\Users
  */
 class Myrow extends User
 {
+    /**
+     * @var mixed
+     */
+    protected $cnt_message;
+
+    /**
+     * @var mixed
+     */
+    protected $cnt_notify;
+
     /**
      * @param int    $id
      * @param string $password
      *
      * @return mixed
      */
-    public static function getMyrow($id, $password)
+    public static function getMyrow(int $id, string $password)
     {
         $dbh = db();
 
-        return $dbh->query('
-          select u.id, u.admin, u.moderator, u.assistant, u.password, u.login, u.gender, u.city, u.country,
-            u.status, u.rate, u.real_status, u.moder_text, u.vip_time, 
-            o.hidden_img,o.stels
-          from users u left join `option` o on o.u_id = u.id 
-          where u.id =' . (int)$id . ' 
-        and u.password = ' . $dbh->quote($password) . ' limit 1')->fetchObject(self::class);
+        $sql = "select `id`, `admin`, `moderator`, `assistant`, `password`, `login`, `gender`, `city`, `country`, 
+            `status`, `rate`, `real_status`, `moder_text`, `vip_time`, `stealth` 
+            from `users` where `id` = {$id} and `password` = {$dbh->quote($password)} limit 1";
+
+        return $dbh->query($sql)->fetchObject(self::class);
     }
 
     /**
@@ -46,14 +53,6 @@ class Myrow extends User
     /**
      * @return bool
      */
-    public function isSuperUser()
-    {
-        return $this->isUser() && (3 === $this->id || 71268 === $this->id);
-    }
-
-    /**
-     * @return bool
-     */
     public function isGuest()
     {
         return !$this->isUser();
@@ -62,19 +61,17 @@ class Myrow extends User
     /**
      * @return bool
      */
-    public function isStels()
+    public function isSuperUser()
     {
-        static $stels;
-
-        return $stels ?? $stels = ($this->isVip() && (bool)$this->stels);
+        return $this->isUser() && (3 === $this->id || 71268 === $this->id);
     }
 
     /**
      * @return bool
      */
-    public function isHiddenImg()
+    public function isStealth()
     {
-        return $this->isUser() && !(bool)$this->hidden_img;
+        return $this->isVip() && (bool)$this->stealth;
     }
 
     /**
@@ -103,7 +100,8 @@ class Myrow extends User
     public function setTimeStamp()
     {
         $cache = cache();
-        if (!$this->isStels()) {
+
+        if (!$this->isStealth()) {
             $uonline = $cache->get('ts' . $this->id);
 
             if (!$uonline || (int)$uonline < ((int)$_SERVER['REQUEST_TIME'] - 600)) {
@@ -125,10 +123,9 @@ class Myrow extends User
      */
     public function getCountFriends()
     {
-        $sql = 'select count(*) from friends where fr_kogo = ' . $this->id . ' and fr_podtv_kogo = 0';
-        $count = db()->query($sql)->fetchColumn();
+        $sql = "select count(*) from friends where fr_kogo = {$this->id} and fr_podtv_kogo = 0";
 
-        return $count ? '<strong style="color: #F00">(+' . $count . ')</strong>' : '';
+        return db()->query($sql)->fetchColumn() ?: '';
     }
 
     /**
@@ -138,9 +135,12 @@ class Myrow extends User
      */
     public function getCountMessage()
     {
-        $sql = 'select count(*) from privat where pr_id_pol = ' . $this->id . ' and pr_pol_vis = 0';
+        if (null === $this->cnt_message) {
+            $sql = "select count(*) from privat where pr_id_pol = {$this->id} and pr_pol_vis = 0";
+            $this->cnt_message = db()->query($sql)->fetchColumn() ?: '';
+        }
 
-        return db()->query($sql)->fetchColumn() ?: '';
+        return $this->cnt_message;
     }
 
     /**
@@ -150,9 +150,12 @@ class Myrow extends User
      */
     public function getCountNotify()
     {
-        $sql = 'select count(*) from notification where id_user = ' . $this->id . ' and visibled = 0';
+        if (null === $this->cnt_notify) {
+            $sql = "select count(*) from notification where id_user = {$this->id} and visibled = 0";
+            $this->cnt_notify = db()->query($sql)->fetchColumn() ?: '';
+        }
 
-        return db()->query($sql)->fetchColumn() ?: '';
+        return $this->cnt_notify;
     }
 
     /**
@@ -162,7 +165,7 @@ class Myrow extends User
      */
     public function getCountGuest()
     {
-        $sql = 'select count(*) from whoisloock where wholoock_kogo = ' . $this->id . ' and looking = 0';
+        $sql = "select count(*) from whoisloock where wholoock_kogo = {$this->id} and looking = 0";
 
         return db()->query($sql)->fetchColumn() ?: '';
     }
