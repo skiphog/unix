@@ -5,7 +5,7 @@ mix.sass('assets/sass/privat.scss', '/css').options({processCssUrls: false});
 */
 
 // noinspection JSUnresolvedFunction
-mix.sass('assets/sass/app.scss', __dirname + '/css').options(
+mix.sass('assets/sass/app.scss', `${__dirname}/public/css`).options(
   {
     processCssUrls: false,
     autoprefixer: {
@@ -17,6 +17,8 @@ mix.sass('assets/sass/app.scss', __dirname + '/css').options(
     }
   }
 );
+
+mix.js('assets/js/app.js', `${__dirname}/public/js`);
 
 //mix.js('assets/js/news/app.js', 'c:\\OSPanel\\domains\\unix\\js\\vue\\news\\');
 //mix.js('assets/js/albums/app.js', 'c:\\OSPanel\\domains\\unix\\js\\vue\\albums\\');

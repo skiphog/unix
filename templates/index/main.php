@@ -3,15 +3,12 @@
 * @var \Crudch\View\View $this
 */
 
-$dbh = db();
+$db = db();
 $myrow = auth();
 
 ?>
 
 <?php $this->extend('layouts/layout'); ?>
-
-<?php $this->start('title'); ?><?php $this->stop(); ?>
-<?php $this->start('description'); ?><?php $this->stop(); ?>
 
 <?php $this->start('style'); ?>
 <?php $this->stop(); ?>
