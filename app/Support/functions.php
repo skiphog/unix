@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @return \App\Models\Users\Myrow
+ * @return \App\Models\Users\Auth
  */
 function auth()
 {
-    return app(\App\Components\Auth::class);
+    return app(\App\Components\Guard::class);
 }

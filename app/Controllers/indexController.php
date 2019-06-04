@@ -8,6 +8,6 @@ class indexController extends Controller
 {
     public function index()
     {
-        return view('layouts/layout');
+        return view('index/main');
     }
 }

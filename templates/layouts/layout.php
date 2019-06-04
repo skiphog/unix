@@ -1,12 +1,23 @@
+<?php
+/**
+ * @var \Crudch\View\View $this
+ */
+$dbh = db();
+$auth = auth();
+
+$auth->detectMobile();
+$auth->setTimeStamp();
+
+?>
 <!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+<?php require __DIR__ . '/head.php'; ?>
 <body>
-
+<?php if ($auth->isStealth()) {
+    require __DIR__ . '/incognito.php';
+} ?>
+<script src="/js/jquery-1.12.4.min.js"></script>
+<script src="/js/app.js"></script>
+<?php echo $this->renderBlock('script') ?>
 </body>
 </html>

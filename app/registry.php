@@ -4,8 +4,8 @@
  */
 return [
     'global' => [
-        \App\Components\Auth::class => static function () {
-            return \App\Components\Auth::init();
+        \App\Components\Guard::class => static function () {
+            return \App\Components\Guard::init();
         },
     ],
     'web'    => [],

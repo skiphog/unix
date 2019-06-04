@@ -2,8 +2,6 @@
 
 namespace App\Models\Users;
 
-use Detection\MobileDetect;
-
 /**
  * Class Myrow
  *
@@ -13,7 +11,7 @@ use Detection\MobileDetect;
  *
  * @package App\Models\Users
  */
-class Myrow extends User
+class Auth extends User
 {
     /**
      * @var mixed
@@ -26,12 +24,17 @@ class Myrow extends User
     protected $cnt_notify;
 
     /**
+     * @var bool
+     */
+    protected $mobile = false;
+
+    /**
      * @param int    $id
      * @param string $password
      *
      * @return mixed
      */
-    public static function getMyrow(int $id, string $password)
+    public static function init(int $id, string $password)
     {
         $dbh = db();
 
@@ -79,41 +82,51 @@ class Myrow extends User
      */
     public function isMobile()
     {
-        if (isset($_SESSION['mobile'])) {
-            return (bool)$_SESSION['mobile'];
-        }
-
-        if (isset($_COOKIE['mobile'])) {
-            return (bool)$_SESSION['mobile'] = (int)$_COOKIE['mobile'];
-        }
-
-        $detect = (int)(new MobileDetect())->isMobile();
-        $_SESSION['mobile'] = $detect;
-        setcookie('mobile', $detect, 0x7FFFFFFF, '/', config('domain'));
-
-        return (bool)$detect;
+        return $this->mobile;
     }
 
     /**
      * Обновить время на сайте
+     *
+     * @var void
      */
     public function setTimeStamp()
     {
-        $cache = cache();
+        if ($this->isUser()) {
+            $cache = cache();
+            if (!$this->isStealth()) {
+                $uonline = $cache->get('ts' . $this->id);
 
-        if (!$this->isStealth()) {
-            $uonline = $cache->get('ts' . $this->id);
-
-            if (!$uonline || (int)$uonline < ((int)$_SERVER['REQUEST_TIME'] - 600)) {
-                db()->exec('update users_timestamps 
+                if (!$uonline || (int)$uonline < ((int)$_SERVER['REQUEST_TIME'] - 600)) {
+                    db()->exec('update users_timestamps 
                       set last_view = NOW(), ip = ' . request()->clientIp2long() . ' 
                     where id = ' . $this->id);
 
-                $cache->delete('online_users');
+                    $cache->delete('online_users');
+                }
             }
+            $cache->set('ts' . $this->id, (int)$_SERVER['REQUEST_TIME']);
         }
+    }
 
-        $cache->set('ts' . $this->id, (int)$_SERVER['REQUEST_TIME']);
+    /**
+     * Определить мобильность
+     *
+     * @return void
+     */
+    public function detectMobile()
+    {
+        if (isset($_SESSION['mobile'])) {
+            $this->mobile = (bool)$_SESSION['mobile'];
+        } elseif (isset($_COOKIE['mobile'])) {
+            $_SESSION['mobile'] = (int)$_COOKIE['mobile'];
+            $this->mobile = (bool)$_SESSION['mobile'];
+        } else {
+            $detect = (int)(new \Detection\MobileDetect())->isMobile();
+            $_SESSION['mobile'] = $detect;
+            setcookie('mobile', $detect, 0x7FFFFFFF, '/', config('domain'));
+            $this->mobile = (bool)$detect;
+        }
     }
 
     /**
