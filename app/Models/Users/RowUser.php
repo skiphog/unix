@@ -20,7 +20,7 @@ use Crudch\Date\CrutchDate;
  * @property string     $about
  * @property CrutchDate $last_view
  *
- * @package App\Models
+ * @package App\Models\Users
  */
 class RowUser extends User
 {

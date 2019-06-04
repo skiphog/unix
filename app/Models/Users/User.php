@@ -7,8 +7,6 @@ use Crudch\Database\Model;
 /**
  * Class User
  *
- * @package App\Models
- *
  * @property int    $id
  * @property int    $admin
  * @property int    $moderator
@@ -21,6 +19,8 @@ use Crudch\Database\Model;
  * @property int    $real_status
  * @property string $moder_text
  * @property string $vip_time
+ *
+ * @package App\Models\Users
  */
 class User extends Model
 {
