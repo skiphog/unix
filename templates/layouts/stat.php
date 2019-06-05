@@ -1,21 +1,21 @@
 <?php
 /**
  * @var PDO                     $db
- * @var \App\Models\Users\Myrow $auth
+ * @var \App\Models\Users\Auth $auth
  */
 
-$a_count = remember('a_count', function () use (&$db) {
+$a_count = remember('a_count', static function () use (&$db) {
     return (int)$db->query('select count(*) from users')
         ->fetchColumn();
 }, 43200);
-$g_online = remember('visitors', function () {
+$g_online = remember('visitors', static function () {
     try {
         return random_int(100, 400);
     } catch (Exception $e) {
         return 100;
     }
 }, 600);
-$ondata = remember('online_users', function () use (&$db) {
+$ondata = remember('online_users', static function () {
     /* $sql = 'select ut.id,ut.last_view,u.login,u.admin,u.vip_time,
          u.vipsmile,u.moderator,u.pic1,u.gender,u.city,u.birthday
          from users_timestamps ut
@@ -34,7 +34,7 @@ $users = [];
 
 if ($auth->isUser()) {
     foreach ($ondata as $user) {
-        if (0 === getCityCompare($auth->city, $user['city'])) {
+        if (1 === cityCompare($auth->city, $user['city'])) {
             $city_users[] = $user;
             continue;
         }
@@ -50,28 +50,28 @@ $date = date('m-d');
     <ul class="information-list">
         <li>Всего анкет: <strong><?php echo formatNumber($a_count); ?></strong></li>
         <li>
-            <a href="<?php echo url('/onlinemeet_1_1'); ?>">Всего онлайн:</a>
+            <a href="<?php echo url('/users/online'); ?>">Всего онлайн:</a>
             <strong><?php echo $t_online; ?></strong>
         </li>
         <li>Гостей - <strong><?php echo $g_online; ?></strong></li>
         <li>Пользователей - <strong><?php echo $u_online ?></strong></li>
     </ul>
     <?php if($auth->isUser()) {
-        echo render('partials/users_stat_city', [
+        echo render('layouts/partials/users_stat_city', [
             'users' => $city_users,
             'date'  => $date,
         ]);
 
-        uasort($users, function ($a, $b){
+        uasort($users, static function ($a, $b){
             return -(count($a) <=> count($b));
         });
 
-        echo render('partials/users_stat_other', [
+        echo render('layouts/partials/users_stat_other', [
             'data' => $users,
             'date'  => $date,
         ]);
     }else {
-        echo render('partials/users_stat', [
+        echo render('layouts/partials/users_stat', [
             'users' => $ondata,
             'date'  => $date,
         ]);

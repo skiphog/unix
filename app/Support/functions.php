@@ -33,3 +33,38 @@ function smile($text)
 {
     return strtr($text, \App\Arrays\Smiles::$smiles);
 }
+
+/**
+ * @param string $city1
+ * @param string $city2
+ *
+ * @return int
+ */
+function cityCompare($city1, $city2)
+{
+    return (int)(mb_strtolower($city1) === mb_strtolower($city2));
+}
+
+/**
+ * @param int $number
+ *
+ * @return string
+ */
+function formatNumber($number)
+{
+    return number_format($number, 0, '', ' ');
+}
+
+/**
+ * Получить иконку юзера на основании gender
+ *
+ * @param int $gender
+ * @param int $width
+ * @param int $height
+ *
+ * @return string
+ */
+function genderIcon($gender, $width = 20, $height = 20)
+{
+    return '<img class="user-icon" src="' . \App\Arrays\Genders::$icons[$gender] . '" width="' . $width . '" height="' . $height . '" alt="gender">';
+}

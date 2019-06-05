@@ -3,35 +3,25 @@
  * @var PDO $db
  */
 
-$total_new_moder = $db->query('select count(*) from users where `status` = 3')->fetchColumn() ?: '';
-$total_new_moder1 = $db->query('select count(*) from `events` where `status` = 3')->fetchColumn() ?: '';
+$users = $db->query('select count(*) from users where `status` = 3')->fetchColumn() ?: '';
+$events = $db->query('select count(*) from `events` where `status` = 3')->fetchColumn() ?: '';
 ?>
-<style>
-    #moder-count, .moder-anons {
-        color: #F00;
-        font-weight: 700;
-    }
-
-    #moder-count {
-        font-size: 16px
-    }
-</style>
-
+<style>#moder-count,.moder-anons{color:#F00;font-weight:700;}#moder-count{font-size:16px}</style>
 <section class="information">
     <h3 class="information-header">Модераторская</h3>
     <ul class="information-list">
         <li>
-            <a href="<?php echo url('/moder_log?action=moderations'); ?>">Модерация</a>
-            <span id="moder-count"><?= $total_new_moder; ?></span>
+            <a href="<?php echo url('/sw-moderator/list?action=moderations'); ?>">Модерация</a>
+            <span id="moder-count"><?php echo $users; ?></span>
         </li>
-        <li><a href="<?php echo url('/moder_log?action=photo'); ?>">Фотографии</a></li>
-        <li><a href="<?php echo url('/notebook'); ?>">Блокнот</a></li>
+        <li><a href="<?php echo url('/sw-moderator/list=photo'); ?>">Фотографии</a></li>
+        <li><a href="<?php echo url('/sw-moderator/notebook'); ?>">Блокнот</a></li>
         <li>
-            <a href="<?php echo url('/adminparty'); ?>">Анонсы</a>
-            <span class="moder-anons"><?= $total_new_moder1; ?></span>
+            <a href="<?php echo url('/sw-moderator/parties'); ?>">Анонсы</a>
+            <span class="moder-anons"><?php echo $events; ?></span>
         </li>
-        <li><a href="<?php echo url('/banlist'); ?>">Управление</a></li>
-        <li><a href="<?php echo url('/modanket'); ?>">Лог-лист</a></li>
-        <li><a href="<?php echo url('/masters'); ?>">Мастерская</a></li>
+        <li><a href="<?php echo url('/sw-moderator/management'); ?>">Управление</a></li>
+        <li><a href="<?php echo url('/sw-moderator/logs'); ?>">Лог-лист</a></li>
+        <li><a href="<?php echo url('/sw-moderator/masters'); ?>">Мастерская</a></li>
     </ul>
 </section>
