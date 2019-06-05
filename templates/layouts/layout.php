@@ -21,9 +21,7 @@ $global = remember('main', static function () {
 <html lang="ru">
 <?php require __DIR__ . '/head.php'; ?>
 <body>
-<?php if ($auth->isStealth()) {
-    require __DIR__ . '/incognito.php';
-} ?>
+<?php if ($auth->isStealth()) {require __DIR__ . '/incognito.php';} ?>
 <header class="header">
     <div class="header-section header-left" style="background-image: url('/img/backgrounds/left_<?php echo $global['background']; ?>.jpg')"><?php require __DIR__ . '/chat.php'; ?></div>
     <div class="header-section header-center" style="background-image: url('/img/backgrounds/center_<?php echo $global['background']; ?>.jpg')"><div class="header-center-attach"><?php require __DIR__ . '/center.php';require __DIR__ . '/mordalenta.php'; ?></div></div>
@@ -34,21 +32,17 @@ $global = remember('main', static function () {
         <div class="main-left-wrapper">
             <?php
             require __DIR__ . '/menu_user.php';
-            if($auth->isAdmin()) {
-                require __DIR__ . '/menu_admin.php';
-            }
-            if($auth->isModerator()) {
-                require __DIR__ . '/menu_mod.php';
-            }
+            if($auth->isAdmin()) {require __DIR__ . '/menu_admin.php';}
+            if($auth->isModerator()) {require __DIR__ . '/menu_mod.php';}
             require __DIR__ . '/story.php';
             require __DIR__ . '/stat.php';
             require __DIR__ . '/dop.php';
             ?>
         </div>
     </aside>
-
     <div id="content" class="main-row main-content"><?php echo $this->renderBlock('content') ?></div>
 </main>
+<footer class="footer"><?php require __DIR__ . '/footer.php'; ?></footer>
 <script src="/js/jquery-1.12.4.min.js"></script>
 <script src="/js/app.js"></script>
 <?php echo $this->renderBlock('script') ?>
