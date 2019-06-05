@@ -43,6 +43,7 @@ $global = remember('main', static function () {
     <div id="content" class="main-row main-content"><?php echo $this->renderBlock('content') ?></div>
 </main>
 <footer class="footer"><?php require __DIR__ . '/footer.php'; ?></footer>
+<div id="info-privat" class="border-box"></div><div id="preload-users" class="border-box-tip"><div id="response-preload-users"></div></div>
 <script src="/js/jquery-1.12.4.min.js"></script>
 <script src="/js/app.js"></script>
 <?php echo $this->renderBlock('script') ?>
