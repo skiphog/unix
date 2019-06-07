@@ -93,7 +93,7 @@
     <section class="information">
         <ul class="information-list">
             <li><a href="<?php echo url('/registration'); ?>">Зарегистрироваться</a></li>
-            <li><a href="<?php echo url('/repass'); ?>">Напомнить пароль</a></li>
+            <li><a href="<?php echo url('/repass'); ?>">Восстановить пароль</a></li>
         </ul>
     </section>
 <?php endif;

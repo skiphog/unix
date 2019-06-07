@@ -4,3 +4,4 @@
  */
 
 $route->get('/', 'IndexController@index');
+
