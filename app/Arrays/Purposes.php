@@ -9,7 +9,7 @@ namespace App\Arrays;
  */
 class Purposes
 {
-    //todo:: Полная хуйня как всегда
+    //Полная хуйня как всегда
     public static /** @noinspection PackedHashtableOptimizationInspection */
         $array = [
         7  => 'Свинг открытый (совместный)',
