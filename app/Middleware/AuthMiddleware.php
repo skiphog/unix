@@ -21,7 +21,11 @@ class AuthMiddleware implements MiddlewareInterface
     public function handle(Request $request, callable $next)
     {
         if (auth()->isGuest()) {
-            return redirect('/login');
+            if ($request->ajax()) {
+                return json(['message' => 'Доступ разрешен только зарегистрированным пользователям'], 403);
+            }
+
+            return redirect('/auth/login');
         }
 
         return $next($request);

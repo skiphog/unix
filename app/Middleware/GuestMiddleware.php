@@ -18,6 +18,10 @@ class GuestMiddleware implements MiddlewareInterface
         $auth = auth();
 
         if ($auth->isUser()) {
+            if ($request->ajax()) {
+                return json(['message' => 'Доступ разрешен только гостям'], 403);
+            }
+
             return redirect('/user/' . $auth->id);
         }
 

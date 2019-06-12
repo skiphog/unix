@@ -14,7 +14,22 @@ $auth = auth();
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
-<?php var_dump($auth) ?>
+    <form class="information" method="post" action="<?php echo url('/authentication'); ?>">
+        <div class="information-header">Авторизация</div>
+        <ul class="information-list">
+            <li class="information-list-item mb-10">
+                <input class="information-list-input" name="login" type="text" placeholder="Логин" required>
+            </li>
+            <li class="information-list-item mb-10">
+                <input class="information-list-input" name="password" type="password" placeholder="Пароль" required>
+            </li>
+            <li class="information-list-item mb-10">
+                <input id="check-1" name="save" type="checkbox" value="1" checked>
+                <label for="check-1">Запомнить меня</label>
+            </li>
+            <li><button class="btn btn-default" type="submit">Войти</button></li>
+        </ul>
+    </form>
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>
