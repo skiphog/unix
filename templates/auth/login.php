@@ -1,7 +1,7 @@
 <?php
 /**
-* @var \Crudch\View\View $this
-*/
+ * @var \Crudch\View\View $this
+ */
 
 $db = db();
 $auth = auth();

@@ -1,5 +1,5 @@
 User-agent : *
-Disallow : /test
+Disallow : /auth
 
 Sitemap: https://swing-kiska.ru/sitemap.xml
 Crawl-delay: 10

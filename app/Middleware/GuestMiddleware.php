@@ -15,8 +15,10 @@ class GuestMiddleware implements MiddlewareInterface
      */
     public function handle(Request $request, callable $next)
     {
-        if (auth()->isUser()) {
-            return redirect('/');
+        $auth = auth();
+
+        if ($auth->isUser()) {
+            return redirect('/user/' . $auth->id);
         }
 
         return $next($request);
