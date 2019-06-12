@@ -14,8 +14,9 @@ $auth = auth();
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
+    <h1>Вход на сайт</h1>
+
     <form class="information" method="post" action="<?php echo url('/authentication'); ?>">
-        <div class="information-header">Авторизация</div>
         <ul class="information-list">
             <li class="information-list-item mb-10">
                 <input class="information-list-input" name="login" type="text" placeholder="Логин" required>
