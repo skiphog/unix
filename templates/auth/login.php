@@ -38,7 +38,8 @@ $auth = auth();
         .auth-form-error {
             color: #c9302c;
             margin-left: 10px;
-            font-size: .8em;
+            font-size: .9em;
+            height: 16px;
         }
     </style>
 <?php $this->stop(); ?>
@@ -46,10 +47,10 @@ $auth = auth();
 <?php $this->start('content'); ?>
     <h1 class="text-center">Вход на сайт</h1>
     <form class="auth-form shadow-box" method="post" action="<?php echo url('/auth/login'); ?>">
-        <div class="mb-10">
+        <div>
             <label class="auth-form-label" for="login">Логин</label>
             <input class="auth-form-input" id="login" name="login" type="text" autofocus>
-            <div class="auth-form-error">Ошибка</div>
+            <div class="auth-form-error">Пожалуйста, введите корректный email адрес</div>
         </div>
         <div class="mb-10">
             <label class="auth-form-label" for="password">Пароль</label>
@@ -57,13 +58,13 @@ $auth = auth();
             <div class="auth-form-error"></div>
         </div>
         <div class="mb-20 text-center">
-            <button class="btn btn-primary" type="submit">Войти</button>
+            <button class="btn btn-primary" type="button">Войти</button>
         </div>
 
         <div class="text-center">
             <a href="<?php echo url('/auth/registration'); ?>">Зарегистрироваться</a>
             &bull;
-            <a href="<?php echo url('/auth/repass'); ?>">Забыли пароль?</a>
+            <a href="<?php echo url('/auth/repass'); ?>">Восстановить пароль</a>
         </div>
     </form>
 <?php $this->stop(); ?>
