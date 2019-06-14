@@ -14,32 +14,63 @@ $auth = auth();
     <style>
         .auth-form {
             display: block;
-            width: 400px;
+            position: relative;
+            width: 340px;
             margin: 0 auto;
+            padding: 10px 20px;
+        }
+        .auth-form button {
+            width: 120px;
+            padding: 5px;
+        }
+        .auth-form-label {
+            display: inline-block;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+        .auth-form-input {
+            display: block;
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #d4d4d4;
+        }
+
+        .auth-form-error {
+            color: #c9302c;
+            margin-left: 10px;
+            font-size: .8em;
         }
     </style>
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
     <h1 class="text-center">Вход на сайт</h1>
-
-    <form class="auth-form" method="post" action="<?php echo url('/authentication'); ?>">
-
-        <div>
-            <label for="login">Логин</label>
-            <input id="login" name="login" type="text">
+    <form class="auth-form shadow-box" method="post" action="<?php echo url('/auth/login'); ?>">
+        <div class="mb-10">
+            <label class="auth-form-label" for="login">Логин</label>
+            <input class="auth-form-input" id="login" name="login" type="text" autofocus>
+            <div class="auth-form-error">Ошибка</div>
+        </div>
+        <div class="mb-10">
+            <label class="auth-form-label" for="password">Пароль</label>
+            <input class="auth-form-input" id="password" name="password" type="password">
+            <div class="auth-form-error"></div>
+        </div>
+        <div class="mb-20 text-center">
+            <button class="btn btn-primary" type="submit">Войти</button>
         </div>
 
-        <div>
-            <label for="password">Пароль</label>
-            <input id="password" name="password" type="password">
-        </div>
-
-        <div>
-            <button class="btn btn-default" type="submit">Войти</button>
+        <div class="text-center">
+            <a href="<?php echo url('/auth/registration'); ?>">Зарегистрироваться</a>
+            &bull;
+            <a href="<?php echo url('/auth/repass'); ?>">Забыли пароль?</a>
         </div>
     </form>
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>
+    <script>
+        var send;
+
+    </script>
 <?php $this->stop(); ?>
