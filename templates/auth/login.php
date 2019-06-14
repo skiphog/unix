@@ -11,19 +11,28 @@ $auth = auth();
 <?php $this->extend('layouts/layout'); ?>
 
 <?php $this->start('style'); ?>
+    <style>
+        .auth-form {
+            display: block;
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
     <h1 class="text-center">Вход на сайт</h1>
 
-    <form method="post" action="<?php echo url('/authentication'); ?>">
+    <form class="auth-form" method="post" action="<?php echo url('/authentication'); ?>">
 
         <div>
-            <input name="login" type="text">
+            <label for="login">Логин</label>
+            <input id="login" name="login" type="text">
         </div>
 
         <div>
-            <input name="password" type="password">
+            <label for="password">Пароль</label>
+            <input id="password" name="password" type="password">
         </div>
 
         <div>
