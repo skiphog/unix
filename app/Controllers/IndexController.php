@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Crudch\Foundation\Controller;
 
-class indexController extends Controller
+class IndexController extends Controller
 {
     public function index()
     {
