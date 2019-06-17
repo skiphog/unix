@@ -14,7 +14,9 @@ $auth = auth();
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
-<?php var_dump($auth) ?>
+<pre>
+<?php print_r(range('A', 'z')) ?>
+</pre>
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>
