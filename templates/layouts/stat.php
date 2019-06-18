@@ -16,16 +16,15 @@ $g_online = remember('visitors', static function () {
     }
 }, 600);
 $ondata = remember('online_users', static function () {
-    /* $sql = 'select ut.id,ut.last_view,u.login,u.admin,u.vip_time,
+     $sql = 'select ut.id,ut.last_view,u.login,u.admin,u.vip_time,
          u.vipsmile,u.moderator,u.pic1,u.gender,u.city,u.birthday
          from users_timestamps ut
          join users u on u.id = ut.id
          where ut.last_view > DATE_SUB(NOW(), interval 600 second)
      order by u.id desc';
 
-     return $db->query($sql)
-         ->fetchAll(PDO::FETCH_ASSOC);*/
-    return require __DIR__ . '/_usersi.php';
+     return db()->query($sql)
+         ->fetchAll(PDO::FETCH_ASSOC);
 }, 300);
 $t_online = $g_online + ($u_online = count($ondata));
 

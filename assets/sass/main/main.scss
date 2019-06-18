@@ -153,13 +153,13 @@ label {
   margin-bottom: 20px;
 }
 
-.ba::before, .bm-1::before, .bm-3::before, .bs-1::before, .bs-2::before,
-.c-1, .m-1, .m-3, .a-1, .s-1, .s-2,
+/*.ba::before, .bm-1::before, .bm-3::before, .bs-1::before, .bs-2::before,
+.c-1, .m-1, .m-3, .a-1, .s-1, .s-2,*/
 .cnt, .bold {
   font-weight: 700;
 }
 
-a.cs-1,
+a.cs-1, a.cs-1:focus, a.cs-1:visited, a.cs-1:active,
 .c-1,
 .blue {
   color: #1b09e9
