@@ -32,14 +32,27 @@ $auth = auth();
             display: block;
             width: 100%;
             padding: 5px;
-            border: 1px solid #d4d4d4;
+            border: 2px solid #d4d4d4;
+        }
+
+        .auth-form-input:focus {
+            border-color: #0389df;
         }
 
         .auth-form-error {
-            color: #c9302c;
-            margin-left: 10px;
+            color: #f9f9f9;
             font-size: .9em;
             height: 16px;
+            text-align: center;
+        }
+        .input-error {
+            color: brown;
+            border-color:#c9302c;
+        }
+        .input-error + .auth-form-error {
+            background-color: #c9302c;
+            -webkit-box-shadow: rgba(201, 48, 44, 0.1) 0 2px 0;
+            box-shadow: rgba(201, 48, 44, 0.1) 0 2px 0;
         }
     </style>
 <?php $this->stop(); ?>
@@ -48,9 +61,9 @@ $auth = auth();
     <h1 class="text-center">Вход на сайт</h1>
     <form class="auth-form shadow-box" method="post" action="<?php echo url('/auth/login'); ?>">
         <div>
-            <label class="auth-form-label" for="login">Логин</label>
+            <label class="auth-form-label" for="login">Email</label>
             <input class="auth-form-input" id="login" name="login" type="text" autofocus>
-            <div class="auth-form-error">Пожалуйста, введите корректный email адрес</div>
+            <div class="auth-form-error"></div>
         </div>
         <div class="mb-10">
             <label class="auth-form-label" for="password">Пароль</label>
