@@ -5,3 +5,8 @@ use Crudch\Routing\Router;
 /**
  * @var Router $route
  */
+
+// Login, registration, repass, logout
+$route->group('/auth', function (Router $route) {
+    $route->post('/login', 'Auth\LoginController@auth')->middleware('guest');
+});

@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Auth;
 
+use App\Requests\LoginRequest;
 use Crudch\Foundation\Controller;
 
 class LoginController extends Controller
@@ -11,7 +12,7 @@ class LoginController extends Controller
         return view('auth/login');
     }
 
-    public function auth()
+    public function auth(LoginRequest $request)
     {
 
     }
