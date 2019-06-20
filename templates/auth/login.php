@@ -84,7 +84,7 @@ $auth = auth();
 
 <?php $this->start('script'); ?>
     <script>
-        var send;
+      var send;
 
     </script>
 <?php $this->stop(); ?>
