@@ -45,7 +45,7 @@ $auth = auth();
         .auth-form-error {
             color: #f9f9f9;
             font-size: .9em;
-            height: 16px;
+            min-height: 16px;
             text-align: center;
         }
 
