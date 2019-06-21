@@ -68,7 +68,7 @@
         </div>
     <?php endif; ?>
     <div class="information-exit">
-        <a href="<?php echo url('/auth/quit'); ?>" onclick="return confirm('Выйти с сайта?')">Выход</a>
+        <a href="<?php echo url('/api/auth/quit'); ?>" onclick="return confirm('Выйти с сайта?')">Выход</a>
     </div>
 <?php else : ?>
     <h3 class="information-header">Авторизация</h3>

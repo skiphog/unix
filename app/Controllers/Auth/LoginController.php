@@ -41,4 +41,11 @@ class LoginController extends Controller
 
         return $this->success($user);
     }
+
+    public function quit()
+    {
+        Guard::logout();
+
+        return redirect('/');
+    }
 }
