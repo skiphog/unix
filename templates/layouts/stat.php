@@ -1,6 +1,6 @@
 <?php
 /**
- * @var PDO                     $db
+ * @var PDO                    $db
  * @var \App\Models\Users\Auth $auth
  */
 
@@ -16,17 +16,21 @@ $g_online = remember('visitors', static function () {
     }
 }, 600);
 
-$ondata = remember('online_users', static function () {
-     $sql = 'select ut.id, u.login, u.city, u.gender, u.admin,
+if (isProduction()) {
+    $ondata = remember('online_users', static function () {
+        $sql = 'select ut.id, u.login, u.city, u.gender, u.admin,
        u.moderator, u.assistant, u.vipsmile, u.birthday, u.vip_time
          from users_timestamps ut
          join users u on u.id = ut.id
        where ut.last_view > DATE_SUB(NOW(), interval 600 second)
-     order by u.id desc';
+    order by u.id desc';
 
-     return db()->query($sql)
-         ->fetchAll(PDO::FETCH_ASSOC);
-}, 300);
+        return db()->query($sql)
+            ->fetchAll(PDO::FETCH_ASSOC);
+    }, 300);
+} else {
+    $ondata = require __DIR__ . '/_usersi.php';
+}
 
 $t_online = $g_online + ($u_online = count($ondata));
 
@@ -57,21 +61,21 @@ $date = date('m-d');
         <li>Гостей - <strong><?php echo $g_online; ?></strong></li>
         <li>Пользователей - <strong><?php echo $u_online ?></strong></li>
     </ul>
-    <?php if($auth->isUser()) {
+    <?php if ($auth->isUser()) {
         echo render('layouts/partials/users_stat_city', [
             'users' => $city_users,
             'date'  => $date,
         ]);
 
-        uasort($users, static function ($a, $b){
+        uasort($users, static function ($a, $b) {
             return -(count($a) <=> count($b));
         });
 
         echo render('layouts/partials/users_stat_other', [
             'data' => $users,
-            'date'  => $date,
+            'date' => $date,
         ]);
-    }else {
+    } else {
         echo render('layouts/partials/users_stat', [
             'users' => $ondata,
             'date'  => $date,
