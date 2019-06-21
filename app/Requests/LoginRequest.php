@@ -7,9 +7,9 @@ use Crudch\Http\FormRequest;
 class LoginRequest extends FormRequest
 {
     protected static $messages = [
-        'email.required'      => 'Пожалуйста, укажите Ваш email адрес',
-        'email.email'         => 'Пожалуйста, введите корректный email адрес',
-        'email.exists'        => 'Такого пользователя не существует',
+        'email.required'    => 'Пожалуйста, укажите email адрес',
+        'email.email'       => 'Пожалуйста, введите корректный email адрес',
+        'password.required' => 'Пожалуйста, введите пароль',
     ];
 
     /**
@@ -18,7 +18,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'    => 'required|email|exists:users',
+            'email'    => 'required|email',
             'password' => 'required',
         ];
     }

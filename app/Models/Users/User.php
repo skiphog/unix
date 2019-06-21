@@ -119,4 +119,16 @@ class User extends Model
     {
         return is_numeric($value) ? $this->{$name} = (int)$value : $this->{$name} = $value;
     }
+
+    /**
+     * Получить id всех модераторов сайта
+     *
+     * @return array
+     */
+    public static function moderatorIds()
+    {
+        $sql = 'select id from users where moderator <> 0 and id <> 935 order by id';
+
+        return db()->query($sql)->fetchAll(\PDO::FETCH_COLUMN, 0);
+    }
 }

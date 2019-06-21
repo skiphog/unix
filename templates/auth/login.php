@@ -45,7 +45,7 @@ $auth = auth();
         .auth-form-error {
             color: #f9f9f9;
             font-size: .9em;
-            min-height: 16px;
+            min-height: 18px;
             text-align: center;
         }
 
@@ -127,8 +127,8 @@ $auth = auth();
             });
 
           },
-          success: function (json) {
-
+          success: function () {
+            window.location.replace('/');
           }
         });
       });
