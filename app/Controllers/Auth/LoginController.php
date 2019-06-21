@@ -2,10 +2,10 @@
 
 namespace App\Controllers\Auth;
 
-use App\Components\Guard;
-use App\Controllers\ApiResponser;
 use App\Models\Auth\Reg;
+use App\Components\Guard;
 use App\Requests\LoginRequest;
+use App\Controllers\ApiResponser;
 use Crudch\Foundation\Controller;
 
 class LoginController extends Controller
