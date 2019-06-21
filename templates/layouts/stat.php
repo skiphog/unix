@@ -16,7 +16,7 @@ $g_online = remember('visitors', static function () {
     }
 }, 600);
 
-/*$ondata = remember('online_users', static function () {
+$ondata = remember('online_users', static function () {
      $sql = 'select ut.id, u.login, u.city, u.gender, u.admin,
        u.moderator, u.assistant, u.vipsmile, u.birthday, u.vip_time
          from users_timestamps ut
@@ -26,9 +26,7 @@ $g_online = remember('visitors', static function () {
 
      return db()->query($sql)
          ->fetchAll(PDO::FETCH_ASSOC);
-}, 300);*/
-
-$ondata = require __DIR__ . '/_usersi.php';
+}, 300);
 
 $t_online = $g_online + ($u_online = count($ondata));
 
