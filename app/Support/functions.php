@@ -68,3 +68,17 @@ function genderIcon($gender, $width = 20, $height = 20)
 {
     return '<img class="user-icon" src="' . \App\Arrays\Genders::$icons[$gender] . '" width="' . $width . '" height="' . $height . '" alt="gender">';
 }
+
+/**
+ * @param string $text
+ *
+ * @return string
+ */
+function imgart($text)
+{
+    return preg_replace_callback('~{{(.+?)}}~', static function ($matches) {
+        return '<img class="ug-imgart" src="/imgart/' . e($matches[1]) . '">';
+    }, $text);
+}
+
+
