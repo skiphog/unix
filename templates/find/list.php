@@ -10,7 +10,7 @@ $auth = auth();
 
 <?php $this->start('title'); ?>Поиск знакомств<?php $this->stop(); ?>
 <?php $this->start('description'); ?>Поиск знакомств с парами, мужчинами и женщинами.<?php $this->stop(); ?>
-E
+
 <?php $this->start('style'); ?>
 <style>
     .td-padding > td {

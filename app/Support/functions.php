@@ -82,6 +82,22 @@ function imgart($text)
 }
 
 /**
+ * @param $text
+ *
+ * @return mixed|null|string
+ */
+function nickart($text)
+{
+    $login = auth()->login;
+
+    return preg_replace_callback('#\|\|(.+?)\|\|#', static function ($value) use (&$login) {
+        $color = $login === $value[1] ? '#F00' : '#747474';
+
+        return '<b style="color:' . $color . '">' . e($value[1]) . '</b>';
+    }, $text);
+}
+
+/**
  * @param $string
  *
  * @return string
@@ -94,15 +110,15 @@ function html($string)
 /**
  * Доступ к аватарке пользователя
  *
- * @param \App\Models\Users\Auth $myrow
+ * @param \App\Models\Users\Auth $auth
  * @param string                 $pic
  * @param int                    $uVis
  *
  * @return string
  */
-function avatar(\App\Models\Users\Auth $myrow, $pic, $uVis)
+function avatar(\App\Models\Users\Auth $auth, string $pic, int $uVis)
 {
-    if (0 === $uVis || ((2 === $uVis || 1 === $uVis) && $myrow->isUser()) || (3 === $uVis && $myrow->isReal())) {
+    if (0 === $uVis || ((2 === $uVis || 1 === $uVis) && $auth->isUser()) || (3 === $uVis && $auth->isReal())) {
         return '/avatars/user_thumb/' . $pic;
     }
 
