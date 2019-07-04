@@ -30,7 +30,8 @@
       "App\\": "app/"
     },
     "files": [
-      "app/Support/functions.php"
+      "app/Support/functions.php",
+      "app/Support/displayUser.php"
     ]
   },
   "config": {

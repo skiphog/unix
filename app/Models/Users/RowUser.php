@@ -111,4 +111,23 @@ class RowUser extends User
     {
         $this->{'last_view'} = new CrutchDate($value);
     }
+
+    /**
+     * @param $sql
+     *
+     * @return RowUser[]
+     */
+    public static function users($sql)
+    {
+        $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility,
+           u.real_status, u.visibility, u.hot_time, u.regdate,
+           u.vip_time, u.now_status, u.hot_text,
+           u.vipsmile, u.admin, u.moderator, u.city,
+           u.login, u.fname, u.gender, u.about, u.job,
+           ut.last_view
+        from users u join users_timestamps ut on ut.id = u.id where u.status = 1 ' . $sql;
+
+        return db()->query($sql)
+            ->fetchAll(\PDO::FETCH_CLASS, static::class);
+    }
 }

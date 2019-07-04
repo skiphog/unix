@@ -81,4 +81,36 @@ function imgart($text)
     }, $text);
 }
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function html($string)
+{
+    return e($string);
+}
+
+/**
+ * Доступ к аватарке пользователя
+ *
+ * @param \App\Models\Users\Auth $myrow
+ * @param string                 $pic
+ * @param int                    $uVis
+ *
+ * @return string
+ */
+function avatar(\App\Models\Users\Auth $myrow, $pic, $uVis)
+{
+    if (0 === $uVis || ((2 === $uVis || 1 === $uVis) && $myrow->isUser()) || (3 === $uVis && $myrow->isReal())) {
+        return '/avatars/user_thumb/' . $pic;
+    }
+
+    if (2 === $uVis) {
+        return '/img/avatars/user.jpg';
+    }
+
+    return '/img/avatars/real.jpg';
+}
+
 
